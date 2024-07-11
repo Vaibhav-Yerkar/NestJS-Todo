@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { JwtAuthGuard } from 'src/auth/auth.guard';
-import { UserEmail } from 'src/common/decorator/user-email.decorator';
+import { JwtAuthGuard } from '../auth/auth.guard';
+import { UserEmail } from '../common/decorator/user-email.decorator';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Todo')
@@ -13,7 +13,7 @@ export class TodoController {
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({description:"To create a new user task", summary:"To create a new user task"})
+  @ApiOperation({description:"Add a new task", summary:"Add a new task"})
   @Post()
   create(@Body() createTodoDto: CreateTodoDto, @UserEmail()
   userEmail: string) {
@@ -22,7 +22,7 @@ export class TodoController {
   
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({description:"To fetch all  user task", summary:"To fetch all user task"})
+  @ApiOperation({description:"Fetch all the task", summary:"Fetch all the task"})
   @Get()
   findAll(@UserEmail()
     userEmail: string
@@ -33,7 +33,7 @@ export class TodoController {
   
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({description:"To fetch a specific user task", summary:"To fetch a specific user task"})
+  @ApiOperation({description:"Fetch a specific user task", summary:"Fetch a specific user task"})
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.todoService.findOne(+id);
