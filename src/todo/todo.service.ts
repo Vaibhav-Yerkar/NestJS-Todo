@@ -49,7 +49,7 @@ export class TodoService {
   async update(id: number, updateTodoDto: UpdateTodoDto) {
     return this.databaseService.todo.update({
       where:{
-        id: id
+        id:id
       },
       data: updateTodoDto
     });
