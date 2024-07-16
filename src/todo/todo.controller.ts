@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -38,11 +38,11 @@ export class TodoController {
   findOne(@Param('id') id: string) {
     return this.todoService.findOne(+id);
   }
-  
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({description:"To update a specific user task", summary:"To update a specific user task"})
-  @Patch(':id')
+  @ApiOperation({ description:'To update a specific the user task.', summary: 'To update a specific the user task.' })
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todoService.update(+id, updateTodoDto);
   }
